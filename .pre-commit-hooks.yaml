@@ -10,3 +10,19 @@
     - "--silent"
     - "--local"
     - "--yaml=defaultIndent: '  '"
+- id: shfmt-system
+  name: shfmt
+  entry: shfmt
+  language: system
+  types:
+    - shell
+  exclude_types:
+    - zsh
+  description: Shell source code formatter from system-level executables
+  args:
+    - "--write"
+    - "--simplify"
+    - "--indent"
+    - "2"
+    - "--case-indent"
+    - "--space-redirects"
