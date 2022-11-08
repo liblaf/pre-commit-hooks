@@ -1,3 +1,9 @@
+## 0.2.1 (2022-11-08)
+
+### Fix
+
+- **latexindent**: add *.cls to files
+
 ## 0.2.0 (2022-11-08)
 
 ### Feat
