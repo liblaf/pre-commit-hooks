@@ -1,0 +1,12 @@
+- id: latexindent-system
+  name: latexindent.pl
+  entry: latexindent
+  language: script
+  types:
+    - tex
+  description: Run latexindent from system-level executables
+  args:
+    - "--overwriteIfDifferent"
+    - "--silent"
+    - "--local"
+    - "--yaml=defaultIndent: ' '"
