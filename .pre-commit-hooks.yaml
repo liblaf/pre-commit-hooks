@@ -2,8 +2,7 @@
   name: latexindent.pl
   entry: latexindent
   language: system
-  types:
-    - tex
+  files: "^(.*.tex)|(.*.sty)|(.*.cls)|(.*.bib)$"
   description: Run latexindent from system-level executables
   args:
     - "--overwriteIfDifferent"
