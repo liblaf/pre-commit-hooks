@@ -9,15 +9,15 @@ tag_format = "$version"
 version_files = ["pyproject.toml:version"]
 
 [tool.poetry]
-name = "template"
+name = "pre-commit-hooks"
 version = "0.0.0"
-description = "Repository Template"
+description = "Some hooks for pre-commit"
 authors = ["Qin Li <liblaf@outlook.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://liblaf.github.io/template/"
-repository = "https://github.com/liblaf/template"
-documentation = "https://liblaf.github.io/template/"
+homepage = "https://liblaf.github.io/pre-commit-hooks/"
+repository = "https://github.com/liblaf/pre-commit-hooks"
+documentation = "https://liblaf.github.io/pre-commit-hooks/"
 
 [tool.poetry.dependencies]
 python = "^3.10"

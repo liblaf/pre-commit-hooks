@@ -1,3 +1,3 @@
-# template
+# pre-commit-hooks
 
-Repository Template
+Some hooks for pre-commit
