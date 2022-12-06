@@ -8,7 +8,8 @@
     - "--overwriteIfDifferent"
     - "--silent"
     - "--local"
-    - "--yaml=defaultIndent: '  '"
+    - "--modifylinebreaks"
+    - "--GCString"
 - id: shfmt-system
   name: shfmt
   entry: shfmt

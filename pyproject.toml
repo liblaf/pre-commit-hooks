@@ -8,16 +8,19 @@ version = "0.2.2"
 tag_format = "$version"
 version_files = ["pyproject.toml:version"]
 
+[tool.isort]
+profile = "black"
+
 [tool.poetry]
 name = "pre-commit-hooks"
 version = "0.2.2"
 description = "Some hooks for pre-commit"
 authors = ["Qin Li <liblaf@outlook.com>"]
-license = "MIT"
 readme = "README.md"
+license = "MIT"
 homepage = "https://liblaf.github.io/pre-commit-hooks/"
-repository = "https://github.com/liblaf/pre-commit-hooks"
 documentation = "https://liblaf.github.io/pre-commit-hooks/"
+repository = "https://github.com/liblaf/pre-commit-hooks"
 
 [tool.poetry.dependencies]
 python = "^3.10"
