@@ -1,3 +1,9 @@
+## 0.2.3 (2022-12-06)
+
+### Fix
+
+- **latexindent**: add --modifylinebreaks & --GCString
+
 ## 0.2.2 (2022-11-22)
 
 ### Fix

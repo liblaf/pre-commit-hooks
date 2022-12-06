@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.2.2"
+version = "0.2.3"
 tag_format = "$version"
 version_files = ["pyproject.toml:version"]
 
@@ -13,7 +13,7 @@ profile = "black"
 
 [tool.poetry]
 name = "pre-commit-hooks"
-version = "0.2.2"
+version = "0.2.3"
 description = "Some hooks for pre-commit"
 authors = ["Qin Li <liblaf@outlook.com>"]
 readme = "README.md"
