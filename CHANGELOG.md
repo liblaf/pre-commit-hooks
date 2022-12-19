@@ -14,7 +14,7 @@
 
 ### Fix
 
-- **latexindent**: add *.cls to files
+- **latexindent**: add \*.cls to files
 
 ## 0.2.0 (2022-11-08)
 
