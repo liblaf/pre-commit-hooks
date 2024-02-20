@@ -1,0 +1,16 @@
+[dependencies]
+anyhow = "1.0.80"
+clap = { features = ["cargo", "derive", "env"], version = "4.5.1" }
+clap-verbosity-flag = "2.2.0"
+reqwest = "0.11.24"
+serde = { features = ["derive"], version = "1.0.197" }
+serde_yaml = "0.9.32"
+shadow-rs = "0.26.1"
+tokio = { features = ["full"], version = "1.36.0" }
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+
+[package]
+edition = "2021"
+name = "pre-commit-hooks"
+version = "0.0.0"
