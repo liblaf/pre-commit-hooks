@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{fs::File, path::PathBuf};
 
 use clap::Args;
 use octocrab::{Octocrab, OctocrabBuilder};
@@ -20,7 +20,12 @@ pub struct Cmd {
 
 impl Cmd {
     pub async fn run(&self) -> anyhow::Result<()> {
-        let mut cfg = Config::load(self.config.as_path()).await?;
+        let mut cfg = Config::load(
+            &mut File::options()
+                .read(true)
+                .open(self.config.as_path())
+                .log()?,
+        )?;
         let mut client = OctocrabBuilder::new();
         if let Some(token) = self.token.as_deref() {
             client = client.personal_token(token.to_string());
@@ -33,7 +38,13 @@ impl Cmd {
                 .collect::<Vec<_>>(),
         )
         .await;
-        cfg.save(self.config.as_path()).await?;
+        cfg.save(
+            &mut File::options()
+                .write(true)
+                .open(self.config.as_path())
+                .log()?,
+        )
+        .await?;
         Ok(())
     }
 }

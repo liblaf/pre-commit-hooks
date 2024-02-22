@@ -3,6 +3,7 @@ use clap_verbosity_flag::Verbosity;
 
 use crate::log::{DefaultLevel, LogInit};
 
+mod filter;
 mod sort;
 mod update;
 
@@ -11,14 +12,13 @@ mod update;
 pub struct Cmd {
     #[command(subcommand)]
     cmd: SubCmd,
-    #[arg(short, long, env, global(true))]
-    dry_run: bool,
     #[command(flatten)]
     verbose: Verbosity<DefaultLevel>,
 }
 
 #[derive(Debug, Subcommand)]
 enum SubCmd {
+    Filter(filter::Cmd),
     Sort(sort::Cmd),
     Update(update::Cmd),
 }
@@ -26,8 +26,8 @@ enum SubCmd {
 impl Cmd {
     pub async fn run(&self) -> anyhow::Result<()> {
         self.verbose.init();
-        std::env::set_var("DRY_RUN", self.dry_run.to_string());
         match &self.cmd {
+            SubCmd::Filter(cmd) => cmd.run().await,
             SubCmd::Sort(cmd) => cmd.run().await,
             SubCmd::Update(cmd) => cmd.run().await,
         }
