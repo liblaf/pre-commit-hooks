@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Args;
 
-use crate::{log::LogResult, schema::config::Config};
+use crate::schema::config::Config;
 
 #[derive(Debug, Args)]
 pub struct Cmd {
@@ -17,25 +17,14 @@ impl Cmd {
         if self.dry_run {
             todo!()
         }
-        let mut cfg = serde_yaml::from_str::<Config>(
-            tokio::fs::read_to_string(self.config.as_path())
-                .await?
-                .as_str(),
-        )
-        .log()?;
-        cfg.ci.skip.sort();
+        let mut cfg = Config::load(self.config.as_path()).await?;
+        cfg.ci.skip.sort_unstable();
         for repo in cfg.repos.iter_mut() {
-            repo.hooks.sort_unstable_by(|a, b| a.id.cmp(&b.id));
+            repo.hooks
+                .sort_unstable_by(|a, b| a.id.as_str().cmp(b.id.as_str()));
         }
-        cfg.repos.sort_by(|a, b| a.repo.cmp(&b.repo));
-        tokio::fs::write(
-            self.config.as_path(),
-            crate::proc::prettier::prettier_yaml(serde_yaml::to_string(&cfg).log()?.as_str())
-                .await
-                .as_bytes(),
-        )
-        .await
-        .log()?;
+        cfg.repos.sort_unstable_by(|a, b| a.repo.cmp(&b.repo));
+        cfg.save(self.config.as_path()).await?;
         Ok(())
     }
 }

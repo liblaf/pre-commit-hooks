@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Args;
 
-use crate::{log::LogResult, schema::hooks::Hook};
+use crate::schema::hooks::Hooks;
 
 #[derive(Debug, Args)]
 pub struct Cmd {
@@ -17,22 +17,11 @@ impl Cmd {
         if self.dry_run {
             todo!()
         }
-        let mut hooks = serde_yaml::from_str::<Vec<Hook>>(
-            tokio::fs::read_to_string(self.hooks.as_path())
-                .await?
-                .as_str(),
-        )?;
-        hooks.sort_unstable_by(|a, b| a.id.cmp(&b.id));
-        tokio::fs::write(
-            self.hooks.as_path(),
-            crate::proc::prettier::prettier_yaml(
-                serde_yaml::to_string(hooks.as_slice()).log()?.as_str(),
-            )
-            .await
-            .as_bytes(),
-        )
-        .await
-        .log()?;
+        let mut hooks = Hooks::load(self.hooks.as_path()).await?;
+        hooks
+            .0
+            .sort_unstable_by(|a, b| a.id.as_str().cmp(b.id.as_str()));
+        hooks.save(self.hooks.as_path()).await?;
         Ok(())
     }
 }
