@@ -5,7 +5,7 @@ use std::{
 };
 
 use clap::Args;
-use tokio::process::Command;
+use tokio::{io::AsyncWriteExt, process::Command};
 
 use crate::{log::LogResult, schema::config::Config};
 
@@ -52,8 +52,14 @@ async fn active_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     .stdin(Stdio::null())
     .stdout(Stdio::piped())
     .stderr(Stdio::inherit());
+    tracing::debug!(?cmd);
     let child = cmd.spawn().log()?;
     let output = child.wait_with_output().await.log()?;
+    tracing::debug!(%output.status);
+    tokio::io::stdout()
+        .write_all(output.stdout.as_slice())
+        .await
+        .log()?;
     let mut status = Status::Failed;
     let mut hooks = HashSet::new();
     for line in String::from_utf8_lossy(output.stdout.as_slice()).lines() {
