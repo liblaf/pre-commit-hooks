@@ -1,5 +1,5 @@
 {
-  "words": ["octocrab", "taplo"],
+  "words": ["liblaf", "octocrab", "swatinem", "taplo"],
   "ignorePaths": ["*-lock.*", "*.lock", "cspell.json"],
   "dictionaries": [
     "bash",
