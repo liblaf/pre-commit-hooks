@@ -36,8 +36,14 @@ impl Cmd {
             !r.hooks.is_empty()
         });
         if let Some(output) = self.output.as_deref() {
-            cfg.save(&mut File::options().write(true).open(output).log()?)
-                .await?;
+            cfg.save(
+                &mut File::options()
+                    .create(true)
+                    .write(true)
+                    .open(output)
+                    .log()?,
+            )
+            .await?;
         } else {
             cfg.save(&mut std::io::stdout()).await?;
         }
@@ -80,6 +86,7 @@ async fn active_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
                 status = Status::Skipped;
             }
         } else if let Some(id) = line.strip_prefix("- hook id: ") {
+            tracing::debug!("{} {:?}", id, status);
             match status {
                 Status::Failed | Status::Passed => {
                     hooks.insert(id.to_string());
