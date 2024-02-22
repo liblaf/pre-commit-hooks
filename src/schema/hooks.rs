@@ -28,9 +28,9 @@ impl Hooks {
     where
         W: Write,
     {
-        let content = serde_yaml::to_string(self).log()?;
-        let content = crate::proc::prettier::prettier_yaml(content.as_str()).await;
-        writer.write_all(content.as_bytes()).log()?;
+        let contents = serde_yaml::to_string(self).log()?;
+        let contents = crate::proc::prettier::prettier_yaml(contents.as_str()).await;
+        writer.write_all(contents.as_bytes()).log()?;
         Ok(())
     }
 }

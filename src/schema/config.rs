@@ -1,4 +1,4 @@
-use std::io::{Read, Write};
+use std::path::Path;
 
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
@@ -40,21 +40,16 @@ pub struct Hook {
 }
 
 impl Config {
-    pub fn load<R>(reader: R) -> anyhow::Result<Self>
-    where
-        R: Read,
-    {
-        let config = serde_yaml::from_reader(reader).log()?;
+    pub async fn load(path: &Path) -> anyhow::Result<Self> {
+        let contents = tokio::fs::read_to_string(path).await.log()?;
+        let config = serde_yaml::from_str(contents.as_str()).log()?;
         Ok(config)
     }
 
-    pub async fn save<W>(&self, writer: &mut W) -> anyhow::Result<()>
-    where
-        W: Write,
-    {
-        let content = serde_yaml::to_string(self).log()?;
-        let content = crate::proc::prettier::prettier_yaml(content.as_str()).await;
-        writer.write_all(content.as_bytes()).log()?;
+    pub async fn save(&self, path: &Path) -> anyhow::Result<()> {
+        let contents = serde_yaml::to_string(self).log()?;
+        let contents = crate::proc::prettier::prettier_yaml(contents.as_str()).await;
+        tokio::fs::write(path, contents.as_bytes()).await.log()?;
         Ok(())
     }
 }

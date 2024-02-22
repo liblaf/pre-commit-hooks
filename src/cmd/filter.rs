@@ -1,6 +1,5 @@
 use std::{
     collections::HashSet,
-    fs::File,
     path::{Path, PathBuf},
     process::Stdio,
 };
@@ -15,38 +14,19 @@ pub struct Cmd {
     #[arg(default_value = ".pre-commit-config.yaml")]
     config: PathBuf,
     #[arg(short, long)]
-    output: Option<PathBuf>,
+    output: PathBuf,
 }
 
 impl Cmd {
     pub async fn run(&self) -> anyhow::Result<()> {
         let hooks = active_hooks(self.config.as_path()).await?;
-        let mut cfg = Config::load(
-            File::options()
-                .read(true)
-                .open(self.config.as_path())
-                .log()?,
-        )?;
+        let mut cfg = Config::load(self.config.as_path()).await?;
         cfg.ci.skip.retain(|s| hooks.contains(s.as_str()));
-        cfg.repos
-            .iter_mut()
-            .for_each(|r| r.hooks.retain(|h| hooks.contains(h.id.as_str())));
         cfg.repos.retain_mut(|r| {
             r.hooks.retain(|h| hooks.contains(h.id.as_str()));
             !r.hooks.is_empty()
         });
-        if let Some(output) = self.output.as_deref() {
-            cfg.save(
-                &mut File::options()
-                    .create(true)
-                    .write(true)
-                    .open(output)
-                    .log()?,
-            )
-            .await?;
-        } else {
-            cfg.save(&mut std::io::stdout()).await?;
-        }
+        cfg.save(self.output.as_path()).await?;
         Ok(())
     }
 }
