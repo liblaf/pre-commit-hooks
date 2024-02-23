@@ -13,7 +13,7 @@ use crate::{log::LogResult, schema::config::Config};
 pub struct Cmd {
     #[arg(default_value = ".pre-commit-config.yaml")]
     config: PathBuf,
-    #[arg(short, long)]
+    #[arg(short, long, default_value = ".pre-commit-config.yaml")]
     output: PathBuf,
 }
 
@@ -61,7 +61,7 @@ async fn active_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
         .await
         .log()?;
     let mut status = Status::Failed;
-    let mut hooks = HashSet::new();
+    let mut hooks = HashSet::from(["commitizen".to_string()]);
     for line in String::from_utf8_lossy(output.stdout.as_slice()).lines() {
         if line.len() == 79 {
             if line.ends_with("Failed") {
