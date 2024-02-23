@@ -1,14 +1,6 @@
 {
-  "words": ["liblaf", "octocrab", "swatinem", "taplo"],
+  "words": ["choco", "liblaf", "octocrab", "swatinem", "taplo"],
   "ignorePaths": ["*-lock.*", "*.lock", "cspell.json"],
-  "dictionaries": [
-    "bash",
-    "cpp-legacy",
-    "cpp-refined",
-    "dotnet",
-    "makefile",
-    "npm",
-    "rust"
-  ],
+  "dictionaries": ["cpp", "cpp-legacy", "makefile", "rust"],
   "allowCompoundWords": true
 }

@@ -17,8 +17,13 @@ jobs:
         run: |-
           rustup default "${{ env.TOOLCHAIN }}"
           rustup update "${{ env.TOOLCHAIN }}"
-      - name: Rust Cache
+      - name: Cache Rust
         uses: Swatinem/rust-cache@v2
+      - name: Install Tools
+        uses: liblaf/repo/.github/actions/install@main
+        with:
+          brew: coreutils gnu-sed make
+          choco: gnuwin32-coreutils.install make sed
       - name: Build
         run: make dist
       - name: Upload Artifacts
@@ -30,6 +35,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          - windows-latest
+          - macos-latest
 
   release:
     name: Release
@@ -48,8 +55,9 @@ jobs:
         with:
           merge-multiple: true
       - name: Release
-        uses: liblaf/template/.github/actions/release@main
+        uses: liblaf/repo/.github/actions/release@main
         with:
           tag: dev
           files: "*"
           prerelease: true
+          recreate: true
