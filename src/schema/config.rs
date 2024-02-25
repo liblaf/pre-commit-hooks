@@ -27,7 +27,8 @@ pub struct CI {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Repo {
     pub repo: String,
-    pub rev: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rev: Option<String>,
     pub hooks: Vec<Hook>,
 }
 

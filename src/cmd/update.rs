@@ -55,11 +55,12 @@ async fn update_repo_unsafe(client: &Octocrab, repo: &mut Repo) -> anyhow::Resul
     } else {
         get_latest_tag(client, owner, repo_name).await?
     };
-    if repo.rev == new_rev {
+    let old_rev = repo.rev.as_deref().unwrap_or_default();
+    if old_rev == new_rev {
         tracing::info!("[{}] already up to date!", repo.repo);
     } else {
-        tracing::info!("[{}] updating {} -> {}", repo.repo, repo.rev, new_rev);
-        repo.rev = new_rev;
+        tracing::info!("[{}] updating {} -> {}", repo.repo, old_rev, new_rev);
+        repo.rev = Some(new_rev);
     }
     Ok(())
 }

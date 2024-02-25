@@ -1,6 +1,0 @@
-{
-  "words": ["choco", "liblaf", "octocrab", "swatinem", "taplo"],
-  "ignorePaths": ["*-lock.*", "*.lock", "cspell.json"],
-  "dictionaries": ["cpp", "cpp-legacy", "makefile", "npm", "rust"],
-  "allowCompoundWords": true
-}
