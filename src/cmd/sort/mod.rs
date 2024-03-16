@@ -16,6 +16,7 @@ enum SubCmd {
 }
 
 impl Cmd {
+    #[tracing::instrument(err)]
     pub async fn run(&self) -> anyhow::Result<()> {
         match &self.cmd {
             SubCmd::Config(cmd) => cmd.run().await,

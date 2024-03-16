@@ -3,8 +3,6 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 
-use crate::log::LogResult;
-
 // https://pre-commit.com/#pre-commit-configyaml---top-level
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Config {
@@ -41,16 +39,18 @@ pub struct Hook {
 }
 
 impl Config {
+    #[tracing::instrument(err)]
     pub async fn load(path: &Path) -> anyhow::Result<Self> {
-        let contents = tokio::fs::read_to_string(path).await.log()?;
-        let config = serde_yaml::from_str(contents.as_str()).log()?;
+        let contents = tokio::fs::read_to_string(path).await?;
+        let config = serde_yaml::from_str(contents.as_str())?;
         Ok(config)
     }
 
+    #[tracing::instrument(err)]
     pub async fn save(&self, path: &Path) -> anyhow::Result<()> {
-        let contents = serde_yaml::to_string(self).log()?;
+        let contents = serde_yaml::to_string(self)?;
         let contents = crate::proc::prettier::prettier_yaml(contents.as_str()).await;
-        tokio::fs::write(path, contents.as_bytes()).await.log()?;
+        tokio::fs::write(path, contents.as_bytes()).await?;
         Ok(())
     }
 }

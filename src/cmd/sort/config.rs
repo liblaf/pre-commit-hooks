@@ -11,6 +11,7 @@ pub struct Cmd {
 }
 
 impl Cmd {
+    #[tracing::instrument(err)]
     pub async fn run(&self) -> anyhow::Result<()> {
         let mut cfg = Config::load(self.config.as_path()).await?;
         cfg.ci.skip.sort_unstable();

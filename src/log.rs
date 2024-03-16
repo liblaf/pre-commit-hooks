@@ -1,5 +1,3 @@
-use std::panic::Location;
-
 use clap_verbosity_flag::{Level, LogLevel, Verbosity};
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -41,55 +39,6 @@ where
                     .with_writer(std::io::stderr)
                     .init();
             }
-        }
-    }
-}
-
-pub trait LogErr {
-    #[track_caller]
-    fn log(self) -> anyhow::Error;
-}
-
-impl<E> LogErr for E
-where
-    E: Into<anyhow::Error>,
-{
-    #[track_caller]
-    fn log(self) -> anyhow::Error {
-        let err = self.into();
-        let mut message = err.to_string();
-        let sources = err
-            .chain()
-            .skip(1)
-            .enumerate()
-            .map(|(i, err)| format!("{:>5}: {}", i, err))
-            .collect::<Vec<_>>()
-            .join("\n");
-        if !sources.is_empty() {
-            message += "\nCaused by:\n";
-            message += sources.as_str();
-            message += "\n";
-        }
-        let location = Location::caller();
-        tracing::error!(%location, message);
-        err
-    }
-}
-
-pub trait LogResult<T> {
-    #[track_caller]
-    fn log(self) -> anyhow::Result<T>;
-}
-
-impl<T, E> LogResult<T> for Result<T, E>
-where
-    E: Into<anyhow::Error>,
-{
-    #[track_caller]
-    fn log(self) -> anyhow::Result<T> {
-        match self {
-            Ok(value) => Ok(value),
-            Err(err) => Err(err.log()),
         }
     }
 }

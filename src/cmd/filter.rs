@@ -7,7 +7,7 @@ use std::{
 use clap::Args;
 use tokio::{io::AsyncWriteExt, process::Command};
 
-use crate::{log::LogResult, schema::config::Config};
+use crate::schema::config::Config;
 
 #[derive(Debug, Args)]
 pub struct Cmd {
@@ -16,6 +16,7 @@ pub struct Cmd {
 }
 
 impl Cmd {
+    #[tracing::instrument(err)]
     pub async fn run(&self) -> anyhow::Result<()> {
         let unapplied = unapplied_hooks(self.config.as_path()).await?;
         let mut cfg = Config::load(self.config.as_path()).await?;
@@ -29,6 +30,7 @@ impl Cmd {
     }
 }
 
+#[tracing::instrument(err)]
 async fn unapplied_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     let mut cmd = Command::new("pre-commit");
     cmd.args([
@@ -45,15 +47,14 @@ async fn unapplied_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     .stdout(Stdio::piped())
     .stderr(Stdio::inherit());
     tracing::debug!(?cmd);
-    let child = cmd.spawn().log()?;
-    let output = child.wait_with_output().await.log()?;
+    let child = cmd.spawn()?;
+    let output = child.wait_with_output().await?;
     tracing::debug!(%output.status);
     tokio::io::stdout()
         .write_all(output.stdout.as_slice())
-        .await
-        .log()?;
+        .await?;
     let mut unapplied_hooks: HashSet<String> = HashSet::from(["check-hooks-apply".to_string()]);
-    for line in String::from_utf8(output.stdout).log()?.lines() {
+    for line in String::from_utf8(output.stdout)?.lines() {
         if let Some(hook) = line.strip_suffix(" does not apply to this repository") {
             unapplied_hooks.insert(hook.to_string());
         }

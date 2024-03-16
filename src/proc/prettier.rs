@@ -2,8 +2,6 @@ use std::{borrow::Cow, process::Stdio};
 
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
-use crate::log::LogResult;
-
 pub async fn prettier_yaml(contents: &str) -> Cow<str> {
     prettier(contents, "yaml").await
 }
@@ -15,6 +13,7 @@ pub async fn prettier<'a>(contents: &'a str, parser: &str) -> Cow<'a, str> {
     }
 }
 
+#[tracing::instrument(err)]
 pub async fn prettier_unsafe(contents: &str, parser: &str) -> anyhow::Result<String> {
     let mut cmd = tokio::process::Command::new("prettier");
     cmd.arg("--parser")
@@ -22,19 +21,9 @@ pub async fn prettier_unsafe(contents: &str, parser: &str) -> anyhow::Result<Str
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::inherit());
-    let child = cmd.spawn().log()?;
-    child
-        .stdin
-        .unwrap()
-        .write_all(contents.as_bytes())
-        .await
-        .log()?;
+    let child = cmd.spawn()?;
+    child.stdin.unwrap().write_all(contents.as_bytes()).await?;
     let mut contents = String::new();
-    child
-        .stdout
-        .unwrap()
-        .read_to_string(&mut contents)
-        .await
-        .log()?;
+    child.stdout.unwrap().read_to_string(&mut contents).await?;
     Ok(contents)
 }
