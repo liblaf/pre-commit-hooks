@@ -46,7 +46,10 @@ async fn update_repo(client: &Octocrab, repo: &mut Repo) {
 async fn update_repo_unsafe(client: &Octocrab, repo: &mut Repo) -> anyhow::Result<()> {
     let url_pattern: Regex =
         Regex::new(r"https://github.com/(?<owner>[^/]+)/(?<repo>[^/]+)").unwrap();
-    let captures = url_pattern.captures(repo.repo.as_str()).unwrap();
+    let captures = match url_pattern.captures(repo.repo.as_str()) {
+        Some(captures) => captures,
+        None => return Ok(()),
+    };
     let owner = captures.name("owner").unwrap().as_str();
     let repo_name = captures.name("repo").unwrap().as_str();
     let new_rev = if let Ok(tag) = get_latest_release(client, owner, repo_name).await {
