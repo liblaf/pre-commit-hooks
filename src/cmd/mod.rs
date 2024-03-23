@@ -24,7 +24,7 @@ enum SubCmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(err)]
+    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
         self.verbose.init();
         match &self.cmd {

@@ -16,7 +16,7 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(err)]
+    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
         let unapplied = unapplied_hooks(self.config.as_path()).await?;
         let mut cfg = Config::load(self.config.as_path()).await?;
@@ -30,7 +30,7 @@ impl Cmd {
     }
 }
 
-#[tracing::instrument(err)]
+#[tracing::instrument(skip_all, err(Debug))]
 async fn unapplied_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     let mut cmd = Command::new("pre-commit");
     cmd.args([

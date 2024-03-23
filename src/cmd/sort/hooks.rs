@@ -11,7 +11,7 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(err)]
+    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
         let mut hooks = Hooks::load(File::options().read(true).open(self.hooks.as_path())?)?;
         hooks

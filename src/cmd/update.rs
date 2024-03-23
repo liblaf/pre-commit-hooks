@@ -16,7 +16,7 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(err)]
+    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
         let mut cfg = Config::load(self.config.as_path()).await?;
         let mut client = OctocrabBuilder::new();
@@ -42,7 +42,7 @@ async fn update_repo(client: &Octocrab, repo: &mut Repo) {
     }
 }
 
-#[tracing::instrument(err)]
+#[tracing::instrument(skip_all, err(Debug))]
 async fn update_repo_unsafe(client: &Octocrab, repo: &mut Repo) -> anyhow::Result<()> {
     let url_pattern: Regex =
         Regex::new(r"https://github.com/(?<owner>[^/]+)/(?<repo>[^/]+)").unwrap();
@@ -67,7 +67,7 @@ async fn update_repo_unsafe(client: &Octocrab, repo: &mut Repo) -> anyhow::Resul
     Ok(())
 }
 
-#[tracing::instrument(err)]
+#[tracing::instrument(skip_all, err(Debug))]
 async fn get_latest_release(client: &Octocrab, owner: &str, repo: &str) -> anyhow::Result<String> {
     match client.repos(owner, repo).releases().get_latest().await {
         Ok(release) => Ok(release.tag_name),
@@ -82,7 +82,7 @@ async fn get_latest_release(client: &Octocrab, owner: &str, repo: &str) -> anyho
     }
 }
 
-#[tracing::instrument(err)]
+#[tracing::instrument(skip_all, err(Debug))]
 async fn get_latest_tag(client: &Octocrab, owner: &str, repo: &str) -> anyhow::Result<String> {
     let tags = client.repos(owner, repo).list_tags().send().await?;
     let tags = tags.into_iter().map(|t| t.name).collect::<Vec<_>>();
