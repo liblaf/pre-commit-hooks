@@ -1,6 +1,6 @@
 [dependencies]
 anyhow = "1.0.81"
-clap = { features = ["cargo", "derive", "env"], version = "4.5.3" }
+clap = { features = ["cargo", "derive", "env"], version = "4.5.4" }
 clap-verbosity-flag = "2.2.0"
 futures = "0.3.30"
 octocrab = "0.36.0"
