@@ -3,9 +3,6 @@ name: CI
 on:
   push:
 
-env:
-  TOOLCHAIN: stable
-
 jobs:
   build:
     name: Build
@@ -14,9 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Rust
-        run: |-
-          rustup default "${{ env.TOOLCHAIN }}"
-          rustup update "${{ env.TOOLCHAIN }}"
+        run: rustup default stable
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
       - name: Install Tools
@@ -34,21 +29,22 @@ jobs:
     strategy:
       matrix:
         os:
+          - macos-14
+          - macos-latest
           - ubuntu-latest
           - windows-latest
-          - macos-latest
 
   release:
     name: Release
     permissions:
       contents: write
+    needs:
+      - build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-    needs:
-      - build
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4

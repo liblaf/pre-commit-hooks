@@ -2,13 +2,9 @@
 anyhow = "1.0.82"
 clap = { features = ["cargo", "derive", "env"], version = "4.5.4" }
 clap-verbosity-flag = "2.2.0"
-futures = "0.3.30"
-octocrab = "0.38.0"
-regex = "1.10.4"
-reqwest = { features = ["json"], version = "0.12.4" }
-semver = "1.0.22"
+cli = { git = "https://github.com/liblaf/rust-cli.git" }
+concolor-clap = "0.1.0"
 serde = { features = ["derive"], version = "1.0.198" }
-serde_json = "1.0.116"
 serde_yaml = "0.9.33"
 shadow-rs = "0.27.1"
 tokio = { features = ["full"], version = "1.37.0" }

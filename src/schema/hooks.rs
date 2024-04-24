@@ -14,7 +14,7 @@ pub struct Hook {
 pub struct Hooks(pub Vec<Hook>);
 
 impl Hooks {
-    #[tracing::instrument(skip_all, err(Debug))]
+    #[tracing::instrument(skip_all, err)]
     pub fn load<R>(reader: R) -> anyhow::Result<Self>
     where
         R: Read + std::fmt::Debug,
@@ -23,7 +23,7 @@ impl Hooks {
         Ok(hooks)
     }
 
-    #[tracing::instrument(skip_all, err(Debug))]
+    #[tracing::instrument(skip_all, err)]
     pub async fn save<W>(&self, writer: &mut W) -> anyhow::Result<()>
     where
         W: Write + std::fmt::Debug,

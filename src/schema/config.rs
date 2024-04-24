@@ -39,14 +39,14 @@ pub struct Hook {
 }
 
 impl Config {
-    #[tracing::instrument(skip_all, err(Debug))]
+    #[tracing::instrument(skip_all, err)]
     pub async fn load(path: &Path) -> anyhow::Result<Self> {
         let contents = tokio::fs::read_to_string(path).await?;
         let config = serde_yaml::from_str(contents.as_str())?;
         Ok(config)
     }
 
-    #[tracing::instrument(skip_all, err(Debug))]
+    #[tracing::instrument(skip_all, err)]
     pub async fn save(&self, path: &Path) -> anyhow::Result<()> {
         let contents = serde_yaml::to_string(self)?;
         let contents = crate::proc::prettier::prettier_yaml(contents.as_str()).await;

@@ -1,7 +1,6 @@
 use clap::Parser;
 
 mod cmd;
-mod log;
 mod proc;
 mod schema;
 
