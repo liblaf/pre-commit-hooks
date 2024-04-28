@@ -6,11 +6,10 @@
     "commitizen",
     "coreutils",
     "liblaf",
-    "octocrab",
     "serde",
     "swatinem",
     "taplo"
   ],
-  "ignorePaths": [".cspell.json", "*-lock.*", "*.lock"],
+  "ignorePaths": ["**/*-lock.*", "**/*.lock*", "**/.cspell.json"],
   "allowCompoundWords": true
 }
