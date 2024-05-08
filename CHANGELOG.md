@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/liblaf/pre-commit-hooks/compare/v0.1.0...v0.1.1) (2024-05-08)
+
+
+### 🐛 Bug Fixes
+
+* add extra files to release-please config for Rust package version extraction ([7857603](https://github.com/liblaf/pre-commit-hooks/commit/785760376cb8034269f7ed15aa3cdc6d21b6b671))
+* **deps:** update rust crate serde to v1.0.201 ([95a7a2c](https://github.com/liblaf/pre-commit-hooks/commit/95a7a2c93f477f7c29f9e54deb8bf88cfaeae8ed))
+
 ## 0.1.0 (2024-05-07)
 
 ### ✨ Features
