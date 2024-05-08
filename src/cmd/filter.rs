@@ -16,21 +16,19 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
-        let unapplied = unapplied_hooks(self.config.as_path()).await?;
-        let mut cfg = Config::load(self.config.as_path()).await?;
-        cfg.ci.skip.retain(|s| !unapplied.contains(s.as_str()));
+        let unapplied = unapplied_hooks(&self.config).await?;
+        let mut cfg = Config::load(&self.config).await?;
+        cfg.ci.skip.retain(|s| !unapplied.contains(s));
         cfg.repos.retain_mut(|r| {
-            r.hooks.retain(|h| !unapplied.contains(h.id.as_str()));
+            r.hooks.retain(|h| !unapplied.contains(&h.id));
             !r.hooks.is_empty()
         });
-        cfg.save(self.config.as_path()).await?;
+        cfg.save(&self.config).await?;
         Ok(())
     }
 }
 
-#[tracing::instrument(skip_all, err(Debug))]
 async fn unapplied_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     let mut cmd = Command::new("pre-commit");
     cmd.args([
@@ -50,9 +48,7 @@ async fn unapplied_hooks(cfg: &Path) -> anyhow::Result<HashSet<String>> {
     let child = cmd.spawn()?;
     let output = child.wait_with_output().await?;
     tracing::debug!(%output.status);
-    tokio::io::stdout()
-        .write_all(output.stdout.as_slice())
-        .await?;
+    tokio::io::stdout().write_all(&output.stdout).await?;
     let mut unapplied_hooks: HashSet<String> = HashSet::from(["check-hooks-apply".to_string()]);
     for line in String::from_utf8(output.stdout)?.lines() {
         if let Some(hook) = line.strip_suffix(" does not apply to this repository") {

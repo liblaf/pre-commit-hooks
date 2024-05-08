@@ -1,4 +1,4 @@
-use std::io::{Read, Write};
+use std::path::Path;
 
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
@@ -14,23 +14,16 @@ pub struct Hook {
 pub struct Hooks(pub Vec<Hook>);
 
 impl Hooks {
-    #[tracing::instrument(skip_all, err)]
-    pub fn load<R>(reader: R) -> anyhow::Result<Self>
-    where
-        R: Read + std::fmt::Debug,
-    {
-        let hooks = serde_yaml::from_reader::<_, Hooks>(reader)?;
+    pub async fn load(path: &Path) -> anyhow::Result<Self> {
+        let contents = tokio::fs::read(path).await?;
+        let hooks = serde_yaml::from_slice(&contents)?;
         Ok(hooks)
     }
 
-    #[tracing::instrument(skip_all, err)]
-    pub async fn save<W>(&self, writer: &mut W) -> anyhow::Result<()>
-    where
-        W: Write + std::fmt::Debug,
-    {
+    pub async fn save(&self, path: &Path) -> anyhow::Result<()> {
         let contents = serde_yaml::to_string(self)?;
         let contents = crate::proc::prettier::prettier_yaml(contents.as_str()).await;
-        writer.write_all(contents.as_bytes())?;
+        std::fs::write(path, contents.as_bytes())?;
         Ok(())
     }
 }

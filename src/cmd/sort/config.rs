@@ -11,15 +11,14 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
-        let mut cfg = Config::load(self.config.as_path()).await?;
+        let mut cfg = Config::load(&self.config).await?;
         cfg.ci.skip.sort();
         for repo in cfg.repos.iter_mut() {
-            repo.hooks.sort_by(|a, b| a.id.as_str().cmp(b.id.as_str()));
+            repo.hooks.sort_by(|a, b| a.id.cmp(&b.id));
         }
         cfg.repos.sort_by(|a, b| a.repo.cmp(&b.repo));
-        cfg.save(self.config.as_path()).await?;
+        cfg.save(&self.config).await?;
         Ok(())
     }
 }

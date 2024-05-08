@@ -6,7 +6,9 @@
     "commitizen",
     "coreutils",
     "liblaf",
+    "octocrab",
     "serde",
+    "struct",
     "swatinem",
     "taplo"
   ],

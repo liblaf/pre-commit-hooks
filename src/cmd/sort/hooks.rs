@@ -1,4 +1,4 @@
-use std::{fs::File, path::PathBuf};
+use std::path::PathBuf;
 
 use clap::Args;
 
@@ -11,15 +11,10 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    #[tracing::instrument(skip_all, err(Debug))]
     pub async fn run(&self) -> anyhow::Result<()> {
-        let mut hooks = Hooks::load(File::options().read(true).open(self.hooks.as_path())?)?;
-        hooks
-            .0
-            .sort_unstable_by(|a, b| a.id.as_str().cmp(b.id.as_str()));
-        hooks
-            .save(&mut File::options().write(true).open(self.hooks.as_path())?)
-            .await?;
+        let mut hooks = Hooks::load(&self.hooks).await?;
+        hooks.0.sort_unstable_by(|a, b| a.id.cmp(&b.id));
+        hooks.save(&self.hooks).await?;
         Ok(())
     }
 }
