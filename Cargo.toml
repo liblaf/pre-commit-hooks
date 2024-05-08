@@ -13,5 +13,5 @@ tracing-subscriber = "0.3.18"
 
 [package]
 edition = "2021"
-name = "pre-commit-hooks"
+name = "liblaf-pre-commit-hooks"
 version = "0.1.0"

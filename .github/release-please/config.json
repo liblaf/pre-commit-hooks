@@ -16,6 +16,9 @@
   "packages": {
     ".": {
       "release-type": "rust",
+      "extra-files": [
+        { "type": "json", "path": "package.json", "jsonpath": "$.version" }
+      ],
       "include-component-in-tag": false
     }
   }

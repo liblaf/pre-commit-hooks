@@ -13,7 +13,6 @@ pub async fn prettier<'a>(contents: &'a str, parser: &str) -> Cow<'a, str> {
     }
 }
 
-#[tracing::instrument(skip_all, err)]
 pub async fn prettier_unsafe(contents: &str, parser: &str) -> anyhow::Result<String> {
     let mut cmd = tokio::process::Command::new("prettier");
     cmd.arg("--parser")

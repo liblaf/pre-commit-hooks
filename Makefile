@@ -10,7 +10,7 @@ clippy:
 
 dist: dist/pch-$(HOST)
 
-fmt: cargo-fmt fmt/Cargo.toml
+fmt: cargo-fmt fmt-toml\:Cargo.toml
 
 #####################
 # Auxiliary Targets #
@@ -19,13 +19,14 @@ fmt: cargo-fmt fmt/Cargo.toml
 cargo-fmt:
 	cargo fmt
 
-dist/pch-$(HOST): target/release/pre-commit-hooks
+dist/pch-$(HOST): target/release/liblaf-pre-commit-hooks
 	@ install -D --no-target-directory --verbose "$<" "$@"
 
-.PHONY: target/release/pre-commit-hooks
-target/release/pre-commit-hooks:
+target/release/liblaf-pre-commit-hooks: force
 	cargo build --release
 
-fmt/Cargo.toml: Cargo.toml
+fmt-toml\:%: %
 	toml-sort --in-place --all "$<"
 	taplo format "$<"
+
+force:
