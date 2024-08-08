@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.1.2](https://github.com/liblaf/pre-commit-hooks/compare/v0.1.1...v0.1.2) (2024-08-08)
+
+### 🐛 Bug Fixes
+
+- add pre-commit stage for text files ([576a922](https://github.com/liblaf/pre-commit-hooks/commit/576a922725c74b62b72b19265f477b52ab3663fc))
+- **deps:** update rust crate anyhow to v1.0.85 ([5906ee1](https://github.com/liblaf/pre-commit-hooks/commit/5906ee15a11d04dd998030b2b5c9aa4546b8bfed))
+- **deps:** update rust crate anyhow to v1.0.86 ([f2d7c57](https://github.com/liblaf/pre-commit-hooks/commit/f2d7c5748ca744a0545d40f3da8b445bfa063c95))
+- **deps:** update rust crate clap to v4.5.13 ([d7d73c9](https://github.com/liblaf/pre-commit-hooks/commit/d7d73c96122280a18be9713c255bda80d7556416))
+- **deps:** update rust crate clap to v4.5.14 ([04570af](https://github.com/liblaf/pre-commit-hooks/commit/04570af57cd8db5263b540cc9d80c2857ff8ab0e))
+- **deps:** update rust crate clap to v4.5.6 ([07bcae3](https://github.com/liblaf/pre-commit-hooks/commit/07bcae30e310cf4042daac9e9b307e9d45601708))
+- **deps:** update rust crate clap to v4.5.7 ([01318d7](https://github.com/liblaf/pre-commit-hooks/commit/01318d7e91c72b6db8eaa15180ddf83af39423ba))
+- **deps:** update rust crate clap to v4.5.8 ([5900b3e](https://github.com/liblaf/pre-commit-hooks/commit/5900b3e6c047b84915469cc056c16384eaba32a6))
+- **deps:** update rust crate clap to v4.5.9 ([16601bc](https://github.com/liblaf/pre-commit-hooks/commit/16601bc7f425fe99610048a05bc80a92b948d9bb))
+- **deps:** update rust crate clap-verbosity-flag to v2.2.1 ([e460a91](https://github.com/liblaf/pre-commit-hooks/commit/e460a91a341c4516063226a62fdf522c7e3a359a))
+- **deps:** update rust crate serde to v1.0.202 ([db93531](https://github.com/liblaf/pre-commit-hooks/commit/db93531ff50d6d788a27271ab64ed0a3fed78430))
+- **deps:** update rust crate serde to v1.0.203 ([37f2008](https://github.com/liblaf/pre-commit-hooks/commit/37f20080bd02a491fd9fa146eefdad0691477dcd))
+- **deps:** update rust crate serde to v1.0.204 ([0953763](https://github.com/liblaf/pre-commit-hooks/commit/095376302c1f3ea8a7429363b140b1ec425addc3))
+- **deps:** update rust crate serde to v1.0.205 ([1c68e1f](https://github.com/liblaf/pre-commit-hooks/commit/1c68e1fcac79fba5e1cc781d1cf6ded6344c4e07))
+- **deps:** update rust crate tokio to v1.38.0 ([208b56b](https://github.com/liblaf/pre-commit-hooks/commit/208b56b365375709bfabff15cb10d97005e68863))
+- **deps:** update rust crate tokio to v1.38.1 ([4cda5e5](https://github.com/liblaf/pre-commit-hooks/commit/4cda5e53a1dcb97ad608b6dffd804bd546b0ae73))
+- **deps:** update rust crate tokio to v1.39.2 ([9ad8372](https://github.com/liblaf/pre-commit-hooks/commit/9ad8372e9cef092f92faaad505b0647618475810))
+
+### 💻 Continuous Integration
+
+- **repo:** sync with repo template ([2bf8ff1](https://github.com/liblaf/pre-commit-hooks/commit/2bf8ff16e0342e785fb8f791884633cdcf4f22e5))
+- **repo:** sync with repo template ([f4fd527](https://github.com/liblaf/pre-commit-hooks/commit/f4fd52729c5d3c4b7fee67c332a390ff5116ea54))
+- **repo:** sync with repo template ([c19f66f](https://github.com/liblaf/pre-commit-hooks/commit/c19f66f84a975c25d61a321c733c667b6b930ba0))
+- **repo:** sync with repo template ([23bc6e2](https://github.com/liblaf/pre-commit-hooks/commit/23bc6e2693621c9cf819c523177e4b198ff03c1b))
+- **repo:** sync with repo template ([d2a2e66](https://github.com/liblaf/pre-commit-hooks/commit/d2a2e664131597878206361cf4ac00009f995759))
+- **repo:** sync with repo template ([77a55aa](https://github.com/liblaf/pre-commit-hooks/commit/77a55aac94e2865798d529e10ac9787b38165345))
+- **repo:** sync with repo template ([a18277f](https://github.com/liblaf/pre-commit-hooks/commit/a18277f6275c7127f9a51445d293ab5f6a24dba4))
+- **repo:** sync with repo template ([e4a5796](https://github.com/liblaf/pre-commit-hooks/commit/e4a5796c443f55cef2e3d80caf22cebc3b491f08))
+- **repo:** sync with repo template ([b928824](https://github.com/liblaf/pre-commit-hooks/commit/b9288245df7632249fe28a70f71542d41a4e2068))
+- **repo:** sync with repo template ([510d10f](https://github.com/liblaf/pre-commit-hooks/commit/510d10f706ff182407bd83986fd18473b7749c88))
+
 ## [0.1.1](https://github.com/liblaf/pre-commit-hooks/compare/v0.1.0...v0.1.1) (2024-05-08)
 
 ### 🐛 Bug Fixes
