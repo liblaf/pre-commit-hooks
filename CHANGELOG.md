@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/liblaf/pre-commit-hooks/compare/v0.1.2...v0.1.3) (2024-10-13)
+
+
+### 🏗 Miscellaneous Chores
+
+* **repo:** sync with repository template ([841034f](https://github.com/liblaf/pre-commit-hooks/commit/841034fe49af6c39fedd8487b57b038e2db6e00f))
+
 ## [0.1.2](https://github.com/liblaf/pre-commit-hooks/compare/v0.1.1...v0.1.2) (2024-10-12)
 
 
