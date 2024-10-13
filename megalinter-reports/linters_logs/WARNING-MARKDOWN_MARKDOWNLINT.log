@@ -1,0 +1,11 @@
+Results of markdownlint linter (version 0.41.0)
+See documentation on https://megalinter.io/8.0.0/descriptors/markdown_markdownlint/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+CHANGELOG.md:63 MD024/no-duplicate-heading Multiple headings with the same content [Context: "### 🐛 Bug Fixes"]
+CHANGELOG.md:77 MD024/no-duplicate-heading Multiple headings with the same content [Context: "### 🐛 Bug Fixes"]
+CHANGELOG.md:119 MD024/no-duplicate-heading Multiple headings with the same content [Context: "### 🏗 Miscellaneous Chores"]
+CHANGELOG.md:123 MD024/no-duplicate-heading Multiple headings with the same content [Context: "### 💻 Continuous Integration"]
+
