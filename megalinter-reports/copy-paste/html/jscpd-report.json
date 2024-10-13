@@ -1,0 +1,182 @@
+{
+  "statistics": {
+    "detectionDate": "2024-10-13T00:44:34.605Z",
+    "formats": {
+      "rust": {
+        "sources": {
+          "src/cmd/sort/mod.rs": {
+            "lines": 24,
+            "tokens": 167,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/cmd/sort/hooks.rs": {
+            "lines": 19,
+            "tokens": 165,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/cmd/sort/config.rs": {
+            "lines": 23,
+            "tokens": 226,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/schema/hooks.rs": {
+            "lines": 28,
+            "tokens": 276,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 5,
+            "duplicatedTokens": 74,
+            "percentage": 17.86,
+            "percentageTokens": 26.81,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/schema/config.rs": {
+            "lines": 53,
+            "tokens": 395,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 5,
+            "duplicatedTokens": 74,
+            "percentage": 9.43,
+            "percentageTokens": 18.73,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/proc/prettier.rs": {
+            "lines": 27,
+            "tokens": 357,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/cmd/mod.rs": {
+            "lines": 30,
+            "tokens": 216,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/cmd/filter.rs": {
+            "lines": 58,
+            "tokens": 587,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/main.rs": {
+            "lines": 10,
+            "tokens": 75,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 272,
+          "tokens": 2464,
+          "sources": 9,
+          "clones": 1,
+          "duplicatedLines": 5,
+          "duplicatedTokens": 74,
+          "percentage": 1.84,
+          "percentageTokens": 3,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 272,
+      "tokens": 2464,
+      "sources": 9,
+      "clones": 1,
+      "duplicatedLines": 5,
+      "duplicatedTokens": 74,
+      "percentage": 1.84,
+      "percentageTokens": 3,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "rust",
+      "lines": 6,
+      "fragment": ")\n    }\n\n    pub async fn save(&self, path: &Path) -> anyhow::Result<()> {\n        let contents = serde_yaml::to_string(self)?;\n        let contents = crate::proc::prettier::prettier_yaml(&",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/schema/config.rs",
+        "start": 45,
+        "end": 50,
+        "startLoc": {
+          "line": 45,
+          "column": 7,
+          "position": 282
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 2,
+          "position": 356
+        }
+      },
+      "secondFile": {
+        "name": "src/schema/hooks.rs",
+        "start": 20,
+        "end": 25,
+        "startLoc": {
+          "line": 20,
+          "column": 6,
+          "position": 161
+        },
+        "endLoc": {
+          "line": 25,
+          "column": 9,
+          "position": 235
+        }
+      }
+    }
+  ],
+  "filename": "/node-deps/node_modules/@jscpd/html-reporter/dist/templates/main.pug"
+}
