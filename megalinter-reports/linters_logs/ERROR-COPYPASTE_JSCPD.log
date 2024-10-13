@@ -1,0 +1,27 @@
+Results of jscpd linter (version 4.0.5)
+See documentation on https://megalinter.io/8.0.0/descriptors/copypaste_jscpd/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+Clone found (rust):
+ - src/schema/config.rs [45:7 - 50:2] (5 lines, 74 tokens)
+   src/schema/hooks.rs [20:6 - 25:9]
+
+┌────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐
+│ Format │ Files analyzed │ Total lines │ Total tokens │ Clones found │ Duplicated lines │ Duplicated tokens │
+├────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤
+│ rust   │ 9              │ 272         │ 2464         │ 1            │ 5 (1.84%)        │ 74 (3%)           │
+├────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤
+│ Total: │ 9              │ 272         │ 2464         │ 1            │ 5 (1.84%)        │ 74 (3%)           │
+└────────┴────────────────┴─────────────┴──────────────┴──────────────┴──────────────────┴───────────────────┘
+Found 1 clones.
+HTML report saved to megalinter-reports/copy-paste/html/
+ERROR: jscpd found too many duplicates (1.84%) over threshold (0%)
+Error: ERROR: jscpd found too many duplicates (1.84%) over threshold (0%)
+    at ThresholdReporter.report (/node-deps/node_modules/@jscpd/finder/dist/index.js:612:13)
+    at /node-deps/node_modules/@jscpd/finder/dist/index.js:110:18
+    at Array.forEach (<anonymous>)
+    at /node-deps/node_modules/@jscpd/finder/dist/index.js:109:22
+    at async /node-deps/node_modules/jscpd/dist/jscpd.js:351:5
+

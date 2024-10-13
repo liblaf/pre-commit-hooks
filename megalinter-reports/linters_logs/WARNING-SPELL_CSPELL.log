@@ -1,0 +1,85 @@
+Results of cspell linter (version 8.14.1)
+See documentation on https://megalinter.io/8.0.0/descriptors/spell_cspell/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+ 1/29 .github/auto-label.yaml 594.01ms
+ 2/29 .github/blunderbuss.yml 6.10ms
+ 3/29 .github/megalinter/.checkov.yml 1.93ms
+ 4/29 .github/megalinter/.devskim.json 120.98ms
+ 5/29 .github/release-please/.manifest.json 3.30ms
+ 6/29 .github/release-please/config.json 11.89ms
+ 7/29 .github/renovate.json 3.21ms
+ 8/29 .github/sync-repo-settings.yaml 2.46ms
+ 9/29 .github/workflows/ci.yaml 14.01ms
+10/29 .github/workflows/megalinter.yaml 126.72ms X
+.github/workflows/megalinter.yaml:179:15    - Unknown word (stefanzweifel) -- uses: stefanzweifel/git-auto-commit-action
+	 Suggestions: []
+11/29 .gitignore 1.97ms
+12/29 .mega-linter.yaml 258.92ms X
+.mega-linter.yaml:34:12     - Unknown word (ISORT)      -- - PYTHON_ISORT
+	 Suggestions: [SORT, iost, IOST, IGOR, ISAR]
+.mega-linter.yaml:35:12     - Unknown word (MYPY)       -- - PYTHON_MYPY
+	 Suggestions: [MOPY, MYOPY, MACY, MANY, MAPS]
+.mega-linter.yaml:36:12     - Unknown word (PYLINT)     -- - PYTHON_PYLINT
+	 Suggestions: [PLYING, PINT, PAINT, PLANT, PLINK]
+.mega-linter.yaml:42:12     - Unknown word (DEVSKIM)    -- REPOSITORY_DEVSKIM_CONFIG_FILE: .github
+	 Suggestions: [DESK, DEVI, DKIM, DEISM, DENIM]
+.mega-linter.yaml:42:53     - Unknown word (devskim)    -- .github/megalinter/.devskim.json
+	 Suggestions: [desk, devi, dkim, deism, denim]
+.mega-linter.yaml:43:12     - Unknown word (KICS)       -- REPOSITORY_KICS_CONFIG_FILE: .github
+	 Suggestions: [KI'S, KICK, KIDS, KINS, KIPS]
+.mega-linter.yaml:43:49     - Unknown word (kics)       -- .github/megalinter/kics.config
+	 Suggestions: [ki's, kick, kids, kins, kips]
+13/29 .pre-commit-config.yaml 4.43ms
+14/29 .pre-commit-hooks.yaml 3.08ms
+15/29 5a11fc17-7be9-4cdf-9c6f-536b3064e93e-megalinter_file_names_cspell.txt 30.80ms X
+5a11fc17-7be9-4cdf-9c6f-536b3064e93e-megalinter_file_names_cspell.txt:5:20      - Unknown word (devskim)    -- github megalinter devskim
+	 Suggestions: [desk, devi, dkim, deism, denim]
+16/29 CHANGELOG.md 73.11ms
+17/29 Makefile 6.88ms
+18/29 package.json 1.38ms
+19/29 src/cmd/filter.rs 7.86ms
+20/29 src/cmd/mod.rs 7.88ms
+21/29 src/cmd/sort/config.rs 7.77ms
+22/29 src/cmd/sort/hooks.rs 6.08ms
+23/29 src/cmd/sort/mod.rs 8.31ms
+24/29 src/main.rs 1.55ms
+25/29 src/proc/mod.rs 1.33ms
+26/29 src/proc/prettier.rs 2.51ms
+27/29 src/schema/config.rs 3.21ms
+28/29 src/schema/hooks.rs 2.90ms
+29/29 src/schema/mod.rs 1.19ms
+CSpell: Files checked: 29, Issues found: 9 in 3 files.
+
+
+You can skip this misspellings by defining the following .cspell.json file at the root of your repository
+Of course, please correct real typos before :)
+
+{
+    "version": "0.2",
+    "language": "en",
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        "**/.pnpm-lock.json",
+        ".vscode",
+        "package-lock.json",
+        "megalinter-reports"
+    ],
+    "words": [
+        "DEVSKIM",
+        "ISORT",
+        "KICS",
+        "MYPY",
+        "PYLINT",
+        "devskim",
+        "kics",
+        "stefanzweifel"
+    ]
+}
+
+
+You can also copy-paste megalinter-reports/.cspell.json at the root of your repository
